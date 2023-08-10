@@ -1,0 +1,9 @@
+eclipse.preferences.version=1
+environment/project/0.1031950820/PATH/delimiter=;
+environment/project/0.1031950820/PATH/operation=replace
+environment/project/0.1031950820/PATH/value=${HOMEDRIVE}${HOMEPATH}/.p2/pool/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.6.v20230204-1729/jre/bin/server;${HOMEDRIVE}${HOMEPATH}/.p2/pool/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.6.v20230204-1729/jre/bin;C\:\\Program Files\\TortoiseGit\\bin;C\:\\Program Files\\stlink\\stlink-1.7.0-i686-w64-mingw32\\bin;;C\:/Program Files/Java/jdk-13.0.2/bin/server;C\:/Program Files/Java/jdk-13.0.2/bin;C\:\\WINDOWS\\system32;C\:\\WINDOWS;C\:\\WINDOWS\\System32\\Wbem;C\:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C\:\\WINDOWS\\System32\\OpenSSH\\;C\:\\Program Files\\TortoiseSVN\\bin;C\:\\Program Files\\Git\\cmd;C\:\\Program Files\\CMake\\bin;C\:\\Program Files\\nodejs\\;${HOMEDRIVE}${HOMEPATH}\\AppData\\Local\\Microsoft\\WindowsApps;${HOMEDRIVE}${HOMEPATH}\\AppData\\Roaming\\npm;${HOMEDRIVE}${HOMEPATH}\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64\\;${HOMEDRIVE}${HOMEPATH}\\eclipse\\cpp-2022-06\\eclipse;${TOOLS_HOME}\\arm-none-eabi-gcc\\10.3.1-2.1.1\\.content\\bin;${TOOLS_HOME}\\windows-build-tools\\4.2.1-2.1\\.content\\bin;
+environment/project/0.1031950820/TOOLS_HOME/delimiter=;
+environment/project/0.1031950820/TOOLS_HOME/operation=append
+environment/project/0.1031950820/TOOLS_HOME/value=${APPDATA}\\xPacks\\@xpack-dev-tools
+environment/project/0.1031950820/append=true
+environment/project/0.1031950820/appendContributed=true
