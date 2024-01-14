@@ -21,34 +21,18 @@
 ##    Changes
 ##    1-1-2024: mphhpm: initial version
 
+CFILES += $(PROJECT).c
+# TODO - you will need to edit these two lines!
+DEVICE=stm32f401cc
+LIBNAME		= opencm3_stm32f4
+DEFS		= -DSTM32F4
+OOCD_FILE = board/stm32f4discovery.cfg
 
-export CYGWIN_DIR=C:/cygwin64/bin
-export PROJECT = stm32-pwm
-export BUILD_DIR =$(shell $(CYGWIN_DIR)/cygpath -m $(PWD)/./build/$(PROJECT)/obj)
-export OUTPUT_DIR=$(shell $(CYGWIN_DIR)/cygpath -m $(PWD)/./build/$(PROJECT)/bin)
-##
-## ensure no optimization when debugging
-export OPT = -O0
-CPWD=$(shell $(CYGWIN_DIR)/cygpath -m $(PWD))
-##
-## set verbosity as required
-#export V= 99
+# You shouldn't have to edit anything below here.
+VPATH += $(SHARED_DIR)
+INCLUDES += $(patsubst %,-I%, . $(SHARED_DIR))
+OPENCM3_DIR=../libopencm3
 
-all: pwm-build
-
-libopencm3-build:
-	$(CYGWIN_DIR)/bash -e ./compile.sh $(PWD)/libopencm3 V=1 all
-
-libopencm3-clean:
-	$(CYGWIN_DIR)/bash -e ./compile.sh $(PWD)/libopencm3 V=1 clean
-	
-pwm-build:
-	@$(CYGWIN_DIR)/bash -c "mkdir -p $(OUTPUT_DIR) $(BUILD_DIR)"
-	$(CYGWIN_DIR)/bash -e ./compile.sh $(PWD)/pwm V=1 all
-	
-pwm-clean:
-	rm -rf $(PROJECT)/build
-	$(CYGWIN_DIR)/bash -e ./compile.sh $(CPWD)/pwm V=1 clean
-
-pwm-flash: pwm-build
-	st-flash --reset write build/stm32-pwm/bin/stm32-pwm.bin 0x8000000
+include $(OPENCM3_DIR)/mk/genlink-config.mk
+include ../rules.mk
+include $(OPENCM3_DIR)/mk/genlink-rules.mk

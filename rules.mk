@@ -110,8 +110,8 @@ LDLIBS += -Wl,--start-group -lc -lgcc -lnosys -Wl,--end-group
 %: s.%
 %: SCCS/s.%
 
-all: $(PROJECT).elf $(PROJECT).bin
-flash: $(PROJECT).flash
+all: $(OUTPUT_DIR)/$(PROJECT).elf $(OUTPUT_DIR)/$(PROJECT).bin
+flash: $(OUTPUT_DIR)/$(PROJECT).flash
 
 # error if not using linker script generator
 ifeq (,$(DEVICE))
@@ -140,7 +140,7 @@ $(BUILD_DIR)/%.o: %.S
 	@mkdir -p $(dir $@)
 	$(Q)$(CC) $(TGT_ASFLAGS) $(ASFLAGS) $(TGT_CPPFLAGS) $(CPPFLAGS) -o $@ -c $<
 
-$(PROJECT).elf: $(OBJS) $(LDSCRIPT) $(LIBDEPS)
+$(OUTPUT_DIR)/$(PROJECT).elf: $(OBJS) $(LDSCRIPT) $(LIBDEPS)
 	@printf "  LD\t$@\n"
 	$(Q)$(LD) $(TGT_LDFLAGS) $(LDFLAGS) $(OBJS) $(LDLIBS) -o $@
 
@@ -170,7 +170,7 @@ else
 endif
 
 clean:
-	rm -rf $(BUILD_DIR) $(GENERATED_BINS)
+	rm -rf $(BUILD_DIR) $(OUTPUT_DIR) $(GENERATED_BINS)
 
 .PHONY: all clean flash
 -include $(OBJS:.o=.d)
