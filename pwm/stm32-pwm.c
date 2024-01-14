@@ -49,25 +49,6 @@ volatile uint32_t dma_stream_complete = 0;
 uint8_t  dmaStream  = DMA_STREAM1;
 uint32_t dmaChannel = DMA_SxCR_CHSEL_6;
 uint32_t dmaUnit    = DMA2;
-
-/*
-volatile uint32_t  timer2Ticks = 0;
-volatile uint16_t  tim1_dier= 0;
-volatile uint16_t  tim1_dcr= 0;
-volatile uint16_t  tim1_cr1= 0;
-volatile uint16_t  tim1_cr2= 0;
-volatile uint16_t  tim1_sr = 0;
-volatile uint16_t  tim1_egr = 0;
-volatile uint32_t  tim1_ccr1 = 0;
-volatile uint32_t  tim1_ccr2 = 0;
-volatile uint32_t  tim1_ccr3 = 0;
-volatile uint32_t  tim1_ccr4 = 0;
-volatile uint32_t  dma2_stream1_spar = 0;
-volatile uint32_t  dma2_stream1_moar = 0;
-volatile uint32_t  dma2_stream1_ndtr = 0;
-*/
-
-//const uint16_t dma_buffer[] = { 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1400, 1300, 1200, 1100, 1000, 900, 800, 700, 600, 500, 400, 300, 200 }; // Initial duty cycle
 //
 // sequence of values easily recognizable on a scope
 const uint16_t dma_buffer[] = { 100, 350, 500, 350 };
@@ -236,21 +217,29 @@ int main(void) {
     nvic_enable_irq(NVIC_DMA2_STREAM1_IRQ);
 
     while(1) {
+    	//
+    	// report back that dma is working by generating 5 flashes
     	flashes = dma_stream_complete > 0 ? 5:1;
         offTime = 3000 - (flashes*(onTime+shortOffTime));
         if (systicks > ticks) {
         	//
         	// period elapsed
 			if (duration == shortOffTime && ++flashCount == flashes) {
+				//
+				// number of short flashes reached, start over with long time off
 				duration = offTime;
 				gpio_set(GPIOC, GPIO13);
 				flashCount = 0;
 			}
 			else if (duration == onTime) {
+				//
+				// end of short flash reached, start over with short time off
 				duration = shortOffTime;
 				gpio_set(GPIOC, GPIO13);
 			}
 			else if (duration == shortOffTime) {
+				//
+				// end of short time off reached, tart over with short time on
 				duration = onTime;
 				gpio_clear(GPIOC, GPIO13);
 			}
