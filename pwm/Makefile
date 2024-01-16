@@ -32,7 +32,13 @@ OOCD_FILE = board/stm32f4discovery.cfg
 VPATH += $(SHARED_DIR)
 INCLUDES += $(patsubst %,-I%, . $(SHARED_DIR))
 OPENCM3_DIR=../libopencm3
+OPENCM3_TEMPLATE_DIR=../libopencm3-template
 
 include $(OPENCM3_DIR)/mk/genlink-config.mk
-include ../rules.mk
+include $(OPENCM3_TEMPLATE_DIR)/rules.mk
 include $(OPENCM3_DIR)/mk/genlink-rules.mk
+
+$(OUTPUT_DIR)/$(PROJECT).elf: $(OBJS) $(LDSCRIPT) $(LIBDEPS)
+	@printf "  LD\t$@\n"
+	$(Q)$(LD) $(TGT_LDFLAGS) $(LDFLAGS) $(OBJS) $(LDLIBS) -o $@
+

@@ -44,10 +44,10 @@ libopencm3-clean:
 	
 pwm-build:
 	@$(CYGWIN_DIR)/bash -c "mkdir -p $(OUTPUT_DIR) $(BUILD_DIR)"
-	$(CYGWIN_DIR)/bash -e ./compile.sh $(PWD)/pwm V=1 all
+	$(CYGWIN_DIR)/bash -e ./compile.sh $(PWD)/pwm V=1 $(OUTPUT_DIR)/$(PROJECT).bin $(OUTPUT_DIR)/$(PROJECT).list
 	
 pwm-clean:
-	rm -rf $(PROJECT)/build
+	rm -rf ./build/$(PROJECT)
 	$(CYGWIN_DIR)/bash -e ./compile.sh $(CPWD)/pwm V=1 clean
 
 pwm-flash: pwm-build
