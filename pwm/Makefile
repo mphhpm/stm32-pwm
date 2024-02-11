@@ -29,7 +29,8 @@ DEFS		= -DSTM32F4
 OOCD_FILE = board/stm32f4discovery.cfg
 
 # You shouldn't have to edit anything below here.
-VPATH += $(SHARED_DIR)
+VPATH += $(SHARED_DIR) $(sort $(dir $(CFILES)))
+
 INCLUDES += $(patsubst %,-I%, . $(SHARED_DIR))
 OPENCM3_DIR=../libopencm3
 OPENCM3_TEMPLATE_DIR=../libopencm3-template

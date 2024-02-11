@@ -27,7 +27,7 @@
 ##
 ## attempt to use the libopencm3 build system under windows/cygwin/eclipse
 ##
-echo $0 $1 $2
+echo $0 $1 $2 $3 $4 $5 $6
 echo "PWD: $PWD"
 export PATH=/bin:${PATH}
 /bin/make -j 16 --directory $1 -f Makefile $2 $3 $4 $5 $6

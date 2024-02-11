@@ -219,7 +219,7 @@ int main(void) {
     while(1) {
     	//
     	// report back that dma is working by generating 5 flashes
-    	flashes = dma_stream_complete > 0 ? 5:1;
+    	flashes = dma_stream_complete > 0 ? 3:1;
         offTime = 3000 - (flashes*(onTime+shortOffTime));
         if (systicks > ticks) {
         	//
@@ -248,6 +248,11 @@ int main(void) {
 				gpio_clear(GPIOC, GPIO13);
 			}
         	ticks = systicks+duration;
+        	//
+        	// reset dma irq flag
+            if (dma_stream_complete) {
+            	dma_stream_complete = 0;
+            }
         }
     }
 }
